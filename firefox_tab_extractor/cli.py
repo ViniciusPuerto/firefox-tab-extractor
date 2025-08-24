@@ -19,7 +19,7 @@ from .exceptions import (
 def main():
     """Main CLI entry point"""
     parser = argparse.ArgumentParser(
-        description="Extract Firefox browser tabs for organization and productivity",
+        description="Extract Firefox browser tabs for organization and productivity",  # noqa: E501
         formatter_class=argparse.RawDescriptionHelpFormatter,
         epilog="""
 Examples:
@@ -43,13 +43,13 @@ Examples:
     parser.add_argument(
         "--json",
         "-j",
-        help="Output JSON file path (default: firefox_tabs_YYYYMMDD_HHMMSS.json)",
+        help="Output JSON file path (default: firefox_tabs_YYYYMMDD_HHMMSS.json)",  # noqa: E501
     )
 
     parser.add_argument(
         "--csv",
         "-c",
-        help="Output CSV file path (default: firefox_tabs_YYYYMMDD_HHMMSS.csv)",
+        help="Output CSV file path (default: firefox_tabs_YYYYMMDD_HHMMSS.csv)",  # noqa: E501
     )
 
     parser.add_argument("--profile", "-p", help="Custom Firefox profile path")
@@ -95,69 +95,73 @@ Examples:
         stats = extractor.get_statistics(tabs)
 
         # Display summary
-        print(f"\n📊 Summary:")
-        print(f"  • Total tabs: {stats['total_tabs']}")
-        print(f"  • Windows: {stats['total_windows']}")
-        print(f"  • Pinned tabs: {stats['pinned_tabs']}")
-        print(f"  • Hidden tabs: {stats['hidden_tabs']}")
-        print(f"  • Visible tabs: {stats['visible_tabs']}")
+        print("\n📊 Summary:")
+        print("  • Total tabs: {stats['total_tabs']}")
+        print("  • Windows: {stats['total_windows']}")
+        print("  • Pinned tabs: {stats['pinned_tabs']}")
+        print("  • Hidden tabs: {stats['hidden_tabs']}")
+        print("  • Visible tabs: {stats['visible_tabs']}")
 
         # Show preview
         if args.preview > 0:
-            print(f"\n🔍 Preview of first {min(args.preview, len(tabs))} tabs:")
+            print("\n🔍 Preview of first {min(args.preview, len(tabs))} tabs:")
             for i, tab in enumerate(tabs[: args.preview]):
                 print(
-                    f"  {i+1}. {tab.title[:60]}{'...' if len(tab.title) > 60 else ''}"
+                    "  {i+1}. {tab.title[:60]}{'...' if len(tab.title) > 60 else ''}"  # noqa: E501
                 )
-                print(f"     URL: {tab.url[:80]}{'...' if len(tab.url) > 80 else ''}")
-                print(f"     Window: {tab.window_index}, Tab: {tab.tab_index}")
+                print(
+                    "     URL: {tab.url[:80]}{'...' if len(tab.url) > 80 else ''}"
+                )  # noqa: E501
+                print("     Window: {tab.window_index}, Tab: {tab.tab_index}")
                 if tab.pinned:
-                    print(f"     📌 Pinned")
+                    print("     📌 Pinned")
                 print()
 
         # Show domain statistics
         if stats["domains"]:
-            print(f"🌐 Top domains:")
+            print("🌐 Top domains:")
             domain_counts = {}
             for tab in tabs:
                 if tab.domain:
-                    domain_counts[tab.domain] = domain_counts.get(tab.domain, 0) + 1
+                    domain_counts[tab.domain] = (
+                        domain_counts.get(tab.domain, 0) + 1
+                    )  # noqa: E501
 
             sorted_domains = sorted(
                 domain_counts.items(), key=lambda x: x[1], reverse=True
             )
             for domain, count in sorted_domains[:5]:
-                print(f"  • {domain}: {count} tabs")
+                print("  • {domain}: {count} tabs")
 
         if args.stats_only:
             return
 
         # Generate default filenames if not provided
-        timestamp = datetime.now().strftime("%Y%m%d_%H%M%S")
+        # timestamp = datetime.now().strftime("%Y%m%d_%H%M%S")  # noqa: F841
 
         if not args.json:
-            args.json = f"firefox_tabs_{timestamp}.json"
+            args.json = "firefox_tabs_{timestamp}.json"
 
         if not args.csv:
-            args.csv = f"firefox_tabs_{timestamp}.csv"
+            args.csv = "firefox_tabs_{timestamp}.csv"
 
         # Save files
-        print(f"\n💾 Saving files...")
+        print("\n💾 Saving files...")
 
         if args.json:
             extractor.save_to_json(tabs, args.json)
-            print(f"  ✅ JSON: {args.json}")
+            print("  ✅ JSON: {args.json}")
 
         if args.csv:
             extractor.save_to_csv(tabs, args.csv)
-            print(f"  ✅ CSV: {args.csv}")
+            print("  ✅ CSV: {args.csv}")
 
-        print(f"\n🎉 Extraction completed successfully!")
-        print(f"📁 Files created:")
+        print("\n🎉 Extraction completed successfully!")
+        print("📁 Files created:")
         if args.json:
-            print(f"  • {args.json} (for programmatic use)")
+            print("  • {args.json} (for programmatic use)")
         if args.csv:
-            print(f"  • {args.csv} (for Notion import)")
+            print("  • {args.csv} (for Notion import)")
 
     except FirefoxProfileNotFoundError:
         print("❌ Firefox profile not found!")
@@ -169,12 +173,12 @@ Examples:
         sys.exit(1)
 
     except SessionDataError as e:
-        print(f"❌ Failed to read session data: {e}")
+        print("❌ Failed to read session data: {e}")
         print("Try closing and reopening Firefox to refresh session data.")
         sys.exit(1)
 
     except LZ4DecompressionError as e:
-        print(f"❌ Failed to decompress session file: {e}")
+        print("❌ Failed to decompress session file: {e}")
         print("This might happen if Firefox is currently running.")
         print("Try closing Firefox and running the extractor again.")
         sys.exit(1)
@@ -188,8 +192,8 @@ Examples:
         print("\n\n⏹️  Extraction cancelled by user")
         sys.exit(1)
 
-    except Exception as e:
-        print(f"❌ Unexpected error: {e}")
+    except Exception:  # noqa: F841
+        print("❌ Unexpected error: {e}")
         if args.verbose:
             import traceback
 

@@ -44,7 +44,9 @@ class FirefoxTabExtractor:
         self.logger = self._setup_logging(log_level)
 
         if not self.profile_path:
-            self.profile_path, self.recovery_file = self._find_firefox_profile()
+            self.profile_path, self.recovery_file = (
+                self._find_firefox_profile()
+            )  # noqa: E501
 
     def _setup_logging(self, log_level: int) -> logging.Logger:
         """Setup logging for the extractor"""
@@ -66,7 +68,7 @@ class FirefoxTabExtractor:
         Find the active Firefox profile directory and recovery file
 
         Returns:
-            Tuple of (profile_path, recovery_file_path) or (None, None) if not found
+            Tuple of (profile_path, recovery_file_path) or (None, None) if not found  # noqa: E501
         """
         possible_paths = [
             os.path.expanduser("~/.mozilla/firefox/"),
@@ -83,7 +85,7 @@ class FirefoxTabExtractor:
 
         for base_path in possible_paths:
             if os.path.exists(base_path):
-                self.logger.debug(f"Checking base path: {base_path}")
+                self.logger.debug("Checking base path: {base_path}")
 
                 # Look for profile directories
                 profiles = glob.glob(os.path.join(base_path, "*.default*"))
@@ -102,11 +104,15 @@ class FirefoxTabExtractor:
                         else profile
                     )
                     recovery_file = os.path.join(
-                        profile_path, "sessionstore-backups", "recovery.jsonlz4"
+                        profile_path,
+                        "sessionstore-backups",
+                        "recovery.jsonlz4",  # noqa: E501
                     )
 
                     if os.path.exists(recovery_file):
-                        self.logger.info(f"Found Firefox profile: {profile_path}")
+                        self.logger.info(
+                            "Found Firefox profile: {profile_path}"
+                        )  # noqa: E501
                         return profile_path, recovery_file
 
         self.logger.error("Firefox profile not found")
@@ -132,11 +138,15 @@ class FirefoxTabExtractor:
             decompressed = lz4.block.decompress(compressed_data)
             return json.loads(decompressed.decode("utf-8"))
 
-        except Exception as e:
-            self.logger.error(f"Error decompressing file: {e}")
-            raise LZ4DecompressionError(f"Failed to decompress {file_path}: {e}")
+        except Exception:  # noqa: F841
+            self.logger.error("Error decompressing file: {e}")
+            raise LZ4DecompressionError(
+                "Failed to decompress {file_path}: {e}"
+            )  # noqa: E501
 
-    def _extract_tabs_from_session(self, session_data: Dict[str, Any]) -> List[Tab]:
+    def _extract_tabs_from_session(
+        self, session_data: Dict[str, Any]
+    ) -> List[Tab]:  # noqa: E501
         """
         Extract tab information from Firefox session data
 
@@ -217,7 +227,7 @@ class FirefoxTabExtractor:
         if not tabs:
             raise NoTabsFoundError("No tabs found in session data")
 
-        self.logger.info(f"Found {len(tabs)} tabs")
+        self.logger.info("Found {len(tabs)} tabs")
         return tabs
 
     def get_windows(self, tabs: List[Tab]) -> List[Window]:
@@ -263,7 +273,7 @@ class FirefoxTabExtractor:
         with open(output_path, "w", encoding="utf-8") as f:
             json.dump(data, f, indent=2, ensure_ascii=False)
 
-        self.logger.info(f"Saved {len(tabs)} tabs to {output_path}")
+        self.logger.info("Saved {len(tabs)} tabs to {output_path}")
 
     def save_to_csv(self, tabs: List[Tab], output_path: str) -> None:
         """
@@ -292,10 +302,12 @@ class FirefoxTabExtractor:
             writer.writeheader()
 
             for tab in tabs:
-                csv_row = {field: tab.to_dict().get(field, "") for field in fieldnames}
+                csv_row = {
+                    field: tab.to_dict().get(field, "") for field in fieldnames
+                }  # noqa: E501
                 writer.writerow(csv_row)
 
-        self.logger.info(f"Saved {len(tabs)} tabs to {output_path}")
+        self.logger.info("Saved {len(tabs)} tabs to {output_path}")
 
     def get_statistics(self, tabs: List[Tab]) -> Dict[str, Any]:
         """

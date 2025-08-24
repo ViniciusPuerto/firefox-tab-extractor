@@ -146,7 +146,10 @@ class TestFirefoxTabExtractor:
                         {
                             "index": 1,
                             "entries": [
-                                {"title": "Test Tab", "url": "https://example.com"}
+                                {
+                                    "title": "Test Tab",
+                                    "url": "https://example.com",
+                                }  # noqa: E501
                             ],
                             "lastAccessed": 1705312200000,
                             "pinned": False,
@@ -212,7 +215,9 @@ class TestFirefoxTabExtractor:
 
         extractor = FirefoxTabExtractor()
 
-        with tempfile.NamedTemporaryFile(mode="w", suffix=".json", delete=False) as f:
+        with tempfile.NamedTemporaryFile(
+            mode="w", suffix=".json", delete=False
+        ) as f:  # noqa: E501
             temp_file = f.name
 
         try:
@@ -239,7 +244,9 @@ class TestFirefoxTabExtractor:
 
         extractor = FirefoxTabExtractor()
 
-        with tempfile.NamedTemporaryFile(mode="w", suffix=".csv", delete=False) as f:
+        with tempfile.NamedTemporaryFile(
+            mode="w", suffix=".csv", delete=False
+        ) as f:  # noqa: E501
             temp_file = f.name
 
         try:
