@@ -4,7 +4,6 @@ Command-line interface for Firefox Tab Extractor
 
 import argparse
 import sys
-from datetime import datetime
 
 
 from .extractor import FirefoxTabExtractor
@@ -107,12 +106,12 @@ Examples:
             print("\n🔍 Preview of first {min(args.preview, len(tabs))} tabs:")
             for i, tab in enumerate(tabs[: args.preview]):
                 print(
-                    "  {i+1}. {tab.title[:60]}{'...' if len(tab.title) > 60 else ''}"  # noqa: E501
+                    f"  {i+1}. {tab.title[:60]}{'...' if len(tab.title) > 60 else ''}"  # noqa: E501
                 )
                 print(
-                    "     URL: {tab.url[:80]}{'...' if len(tab.url) > 80 else ''}"
-                )  # noqa: E501
-                print("     Window: {tab.window_index}, Tab: {tab.tab_index}")
+                    f"     URL: {tab.url[:80]}{'...' if len(tab.url) > 80 else ''}"  # noqa: E501
+                )
+                print(f"     Window: {tab.window_index}, Tab: {tab.tab_index}")
                 if tab.pinned:
                     print("     📌 Pinned")
                 print()
@@ -131,7 +130,7 @@ Examples:
                 domain_counts.items(), key=lambda x: x[1], reverse=True
             )
             for domain, count in sorted_domains[:5]:
-                print("  • {domain}: {count} tabs")
+                print(f"  • {domain}: {count} tabs")
 
         if args.stats_only:
             return
@@ -140,28 +139,28 @@ Examples:
         # timestamp = datetime.now().strftime("%Y%m%d_%H%M%S")  # noqa: F841
 
         if not args.json:
-            args.json = "firefox_tabs_{timestamp}.json"
+            args.json = "firefox_tabs.json"
 
         if not args.csv:
-            args.csv = "firefox_tabs_{timestamp}.csv"
+            args.csv = "firefox_tabs.csv"
 
         # Save files
         print("\n💾 Saving files...")
 
         if args.json:
             extractor.save_to_json(tabs, args.json)
-            print("  ✅ JSON: {args.json}")
+            print(f"  ✅ JSON: {args.json}")
 
         if args.csv:
             extractor.save_to_csv(tabs, args.csv)
-            print("  ✅ CSV: {args.csv}")
+            print(f"  ✅ CSV: {args.csv}")
 
         print("\n🎉 Extraction completed successfully!")
         print("📁 Files created:")
         if args.json:
-            print("  • {args.json} (for programmatic use)")
+            print(f"  • {args.json} (for programmatic use)")
         if args.csv:
-            print("  • {args.csv} (for Notion import)")
+            print(f"  • {args.csv} (for Notion import)")
 
     except FirefoxProfileNotFoundError:
         print("❌ Firefox profile not found!")
@@ -173,12 +172,12 @@ Examples:
         sys.exit(1)
 
     except SessionDataError as e:
-        print("❌ Failed to read session data: {e}")
+        print(f"❌ Failed to read session data: {e}")
         print("Try closing and reopening Firefox to refresh session data.")
         sys.exit(1)
 
     except LZ4DecompressionError as e:
-        print("❌ Failed to decompress session file: {e}")
+        print(f"❌ Failed to decompress session file: {e}")
         print("This might happen if Firefox is currently running.")
         print("Try closing Firefox and running the extractor again.")
         sys.exit(1)
@@ -193,7 +192,7 @@ Examples:
         sys.exit(1)
 
     except Exception:  # noqa: F841
-        print("❌ Unexpected error: {e}")
+        print("❌ Unexpected error occurred")
         if args.verbose:
             import traceback
 

@@ -45,8 +45,8 @@ def categorize_tab(tab):
 
     # News and articles
     if any(
-        keyword in domain for keyword in ["medium.com", "dev.to", "hashnode.dev"]
-    ):  # noqa: E501
+        keyword in domain for keyword in ["medium.com", "dev.to", "hashnode.dev"]  # noqa: E501
+    ):
         return "Articles"
     if any(keyword in title for keyword in ["news", "article", "blog"]):
         return "Articles"
@@ -223,7 +223,7 @@ def main():
             print("   • {day}: {count} tabs")
 
         # Calculate total reading time
-        total_time = sum(estimate_reading_time(tab) for tab in tabs)  # noqa: F841
+        total_time = sum(estimate_reading_time(tab) for tab in tabs)  # noqa: F841, E501
         print(
             f"\n⏱️  Total estimated reading time: {total_time} minutes ({total_time/60:.1f} hours)"  # noqa: E501
         )

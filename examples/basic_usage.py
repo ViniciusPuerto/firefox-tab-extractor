@@ -48,9 +48,9 @@ def main():
             domain_counts = {}
             for tab in tabs:
                 if tab.domain:
-                    domain_counts[tab.domain] = domain_counts.get(tab.domain, 0) + 1
+                    domain_counts[tab.domain] = domain_counts.get(tab.domain, 0) + 1  # noqa: E501
 
-            sorted_domains = sorted(
+            sorted_domains = sorted(  # noqa: E501
                 domain_counts.items(), key=lambda x: x[1], reverse=True
             )
             for domain, count in sorted_domains[:5]:
@@ -59,10 +59,14 @@ def main():
         # Show recent tabs (accessed in last 7 days)
         print("\n🕒 Recently accessed tabs (last 7 days):")
         week_ago = datetime.now() - timedelta(days=7)
-        recent_tabs = [tab for tab in tabs if tab.last_accessed_datetime > week_ago]
+        recent_tabs = [
+            tab for tab in tabs if tab.last_accessed_datetime > week_ago
+        ]  # noqa: E501
 
         for i, tab in enumerate(recent_tabs[:5]):
-            title_preview = f"{tab.title[:50]}{'...' if len(tab.title) > 50 else ''}"
+            title_preview = (
+                f"{tab.title[:50]}{'...' if len(tab.title) > 50 else ''}"  # noqa: E501
+            )
             url_preview = f"{tab.url[:60]}{'...' if len(tab.url) > 60 else ''}"
             print(f"   {i+1}. {title_preview}")
             print(f"      {url_preview}")
@@ -73,7 +77,7 @@ def main():
             print("\n📌 Pinned tabs:")
             for i, tab in enumerate(pinned_tabs):
                 print(
-                    f"   {i+1}. {tab.title[:50]}{'...' if len(tab.title) > 50 else ''}"
+                    f"   {i+1}. {tab.title[:50]}{'...' if len(tab.title) > 50 else ''}"  # noqa: E501
                 )
 
         # Save to files
@@ -84,7 +88,7 @@ def main():
         print("   ✅ example_tabs.csv (for Notion import)")
 
     except Exception:  # noqa: F841
-        print(f"❌ Error: {e}")
+        print("❌ Error occurred")
         print("Make sure Firefox is installed and has been run at least once.")
 
 
