@@ -1,0 +1,31 @@
+{
+  "extraction_time": "2025-08-24T19:42:36.849539",
+  "total_tabs": 34,
+  "windows": 1,
+  "pinned_tabs": 0,
+  "hidden_tabs": 0,
+  "tabs": [
+    {
+      "window_index": 1,
+      "tab_index": 1,
+      "title": "Real-world engineering challenges: building Cursor",
+      "url": "https://newsletter.pragmaticengineer.com/p/cursor",
+      "last_accessed": 1756012545740,
+      "last_accessed_readable": "2025-08-24 02:15:45",
+      "pinned": false,
+      "hidden": false,
+      "domain": "newsletter.pragmaticengineer.com"
+    },
+    {
+      "window_index": 1,
+      "tab_index": 2,
+      "title": "PostgreSQL JSONB - Powerful Storage for Semi-Structured Data",
+      "url": "https://www.architecture-weekly.com/p/postgresql-jsonb-powerful-storage?ref=dailydev",
+      "last_accessed": 1755654996487,
+      "last_accessed_readable": "2025-08-19 22:56:36",
+      "pinned": false,
+      "hidden": false,
+      "domain": "www.architecture-weekly.com"
+    }
+  ]
+}

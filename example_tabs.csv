@@ -1,0 +1,3 @@
+window_index,tab_index,title,url,last_accessed_readable,pinned,hidden,domain
+1,1,Real-world engineering challenges: building Cursor,https://newsletter.pragmaticengineer.com/p/cursor,2025-08-24 02:15:45,False,False,newsletter.pragmaticengineer.com
+1,2,PostgreSQL JSONB - Powerful Storage for Semi-Structured Data,https://www.architecture-weekly.com/p/postgresql-jsonb-powerful-storage?ref=dailydev,2025-08-19 22:56:36,False,False,www.architecture-weekly.com
