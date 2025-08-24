@@ -14,7 +14,7 @@ from .exceptions import FirefoxProfileNotFoundError, SessionDataError
 
 __all__ = [
     "FirefoxTabExtractor",
-    "Tab", 
+    "Tab",
     "Window",
     "FirefoxProfileNotFoundError",
     "SessionDataError",

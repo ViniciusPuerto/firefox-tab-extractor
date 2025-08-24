@@ -47,11 +47,11 @@ dev = [
 ]
 
 [project.urls]
-Homepage = "https://github.com/yourusername/firefox-tab-extractor"
-Documentation = "https://github.com/yourusername/firefox-tab-extractor#readme"
-Repository = "https://github.com/yourusername/firefox-tab-extractor"
-"Bug Tracker" = "https://github.com/yourusername/firefox-tab-extractor/issues"
-"Discussions" = "https://github.com/yourusername/firefox-tab-extractor/discussions"
+Homepage = "https://github.com/ViniciusPuerto/firefox-tab-extractor"
+Documentation = "https://github.com/ViniciusPuerto/firefox-tab-extractor#readme"
+Repository = "https://github.com/ViniciusPuerto/firefox-tab-extractor"
+"Bug Tracker" = "https://github.com/ViniciusPuerto/firefox-tab-extractor/issues"
+"Discussions" = "https://github.com/ViniciusPuerto/firefox-tab-extractor/discussions"
 
 [project.scripts]
 firefox-tab-extractor = "firefox_tab_extractor.cli:main"

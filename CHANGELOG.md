@@ -113,6 +113,6 @@ Please see [CONTRIBUTING.md](CONTRIBUTING.md) for details on how to contribute t
 ## Support
 
 - 📧 **Email**: your.email@example.com
-- 🐛 **Issues**: [GitHub Issues](https://github.com/yourusername/firefox-tab-extractor/issues)
-- 📖 **Documentation**: [GitHub Wiki](https://github.com/yourusername/firefox-tab-extractor/wiki)
-- 💬 **Discussions**: [GitHub Discussions](https://github.com/yourusername/firefox-tab-extractor/discussions)
+- 🐛 **Issues**: [GitHub Issues](https://github.com/ViniciusPuerto/firefox-tab-extractor/issues)
+- 📖 **Documentation**: [GitHub Wiki](https://github.com/ViniciusPuerto/firefox-tab-extractor/wiki)
+- 💬 **Discussions**: [GitHub Discussions](https://github.com/ViniciusPuerto/firefox-tab-extractor/discussions)
